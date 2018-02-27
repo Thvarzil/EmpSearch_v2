@@ -2,17 +2,19 @@
 using System.Text;
 using System.Data;
 using System.Data.SQLite;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EmpSearch_v2.Controllers
 {
-    
-    public class db_query
+    [Route("api/[controller]")]    
+    public class db_queryController : Controller
     {
-        private SQLiteConnection sQLite;
+        public SQLiteConnection sQLite;
 
         public void DataClass(){
             sQLite = new SQLiteConnection("Data Source = emps.db");
         }
+        [HttpGet("{searchterm}")]
         public string db_search(string searchterm){
             
             // Inserts search term into query
@@ -55,7 +57,7 @@ namespace EmpSearch_v2.Controllers
                     }
                 }
 
-            return results;
+            return "You are connected";
         }
     }
 }
